@@ -1,5 +1,17 @@
 # Infrastructure
 
+- [Infrastructure](#infrastructure)
+  - [Overview](#overview)
+  - [Pre-requisites](#pre-requisites)
+    - [Existing domains](#existing-domains)
+    - [AWS Account](#aws-account)
+  - [Usage](#usage)
+    - [1. Route 53 host zone](#1-route-53-host-zone)
+    - [2. Certified Infrastructure](#2-certified-infrastructure)
+    - [3. Static Website Content](#3-static-website-content)
+      - [3.1 Github actions CICD](#31-github-actions-cicd)
+      - [Requirements](#requirements)
+
 ## Overview
 
 ![alt text](./docs/images/infrastructure.png)
