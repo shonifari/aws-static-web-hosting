@@ -1,4 +1,10 @@
 //
+variable "enable_route53_zone" {
+  description = "When true, creates Route53 hosted zone."
+  type        = bool
+  default     = true
+}
+
 variable "enable_cert_validation" {
   description = "When true, creates all resources for website hosting. When false, only creates Route53 hosted zone."
   type        = bool
@@ -8,7 +14,7 @@ variable "enable_cert_validation" {
 variable "website_name" {
   description = "The name of the website"
   type        = string
-  default     = "mydomain.com"
+  default     = "exampledomain.com"
 }
 
 variable "region" {
@@ -25,3 +31,4 @@ variable "environment" {
 
 
 
+// terraform plan -var='enable_cert_validation=false' -var='enable_route53_zone=false'

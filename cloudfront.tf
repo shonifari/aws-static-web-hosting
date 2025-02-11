@@ -1,9 +1,9 @@
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "website" {
   count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
+  
   origin {
-    domain_name = aws_s3_bucket_website_configuration.main[count.index].website_endpoint
+    domain_name = aws_s3_bucket_website_configuration.main.website_endpoint
     origin_id   = "S3-${var.website_name}"
 
     custom_origin_config {

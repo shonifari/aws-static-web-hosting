@@ -1,14 +1,14 @@
 # S3 bucket for main website
 resource "aws_s3_bucket" "main" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
+  
+  
   bucket = "${var.website_name}"
 }
 
 resource "aws_s3_bucket_website_configuration" "main" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.main[count.index].id
+  
+  
+  bucket = aws_s3_bucket.main.id
 
   index_document {
     suffix = "index.html"
@@ -20,9 +20,9 @@ resource "aws_s3_bucket_website_configuration" "main" {
 }
 
 resource "aws_s3_bucket_public_access_block" "main" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.main[count.index].id
+  
+  
+  bucket = aws_s3_bucket.main.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -31,9 +31,9 @@ resource "aws_s3_bucket_public_access_block" "main" {
 }
 
 resource "aws_s3_bucket_policy" "main" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.main[count.index].id
+  
+  
+  bucket = aws_s3_bucket.main.id
   depends_on = [aws_s3_bucket_public_access_block.main]
   
   policy = jsonencode({
@@ -52,15 +52,15 @@ resource "aws_s3_bucket_policy" "main" {
 
 # S3 bucket for www subdomain (redirect)
 resource "aws_s3_bucket" "www" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
+  
+  
   bucket = "www.${var.website_name}"
 }
 
 resource "aws_s3_bucket_website_configuration" "www" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.www[count.index].id
+  
+  
+  bucket = aws_s3_bucket.www.id
 
   redirect_all_requests_to {
     host_name = "${var.website_name}"
@@ -68,9 +68,9 @@ resource "aws_s3_bucket_website_configuration" "www" {
   }
 }
 resource "aws_s3_bucket_public_access_block" "www" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.www[count.index].id
+  
+  
+  bucket = aws_s3_bucket.www.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -79,9 +79,9 @@ resource "aws_s3_bucket_public_access_block" "www" {
 }
 
 resource "aws_s3_bucket_policy" "www" {
-  count             = var.enable_cert_validation ? 1 : 0
-  provider = aws.main
-  bucket = aws_s3_bucket.www[count.index].id
+  
+  
+  bucket = aws_s3_bucket.www.id
   depends_on = [aws_s3_bucket_public_access_block.www]
   
   policy = jsonencode({

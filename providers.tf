@@ -8,16 +8,16 @@ terraform {
   required_version = ">= 1.2.0"
    backend "s3" {
     bucket = "tf-states"
-    key    = "mydomain.com/terraform.tfstate"
+    key    = "exampledomain.com/terraform.tfstate"
     region = "eu-west-2"
-    encrypt        = true
+    encrypt        = true 
   }
 }
 
 # Main provider in London
 provider "aws" {
   region = var.region
-  alias  = "main"
+  
 }
 
 # Provider for ACM Certificate (must be in us-east-1)
